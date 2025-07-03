@@ -1,0 +1,22 @@
+<%- include("partials/header.ejs") %>
+
+<main>
+    <form action="/create" method="post">
+        <div class="input-field">
+            <label for="blog-title"></label>
+            <input style="width: 800px" type="text" id="blog-title" name="blog-title" placeholder="Title">
+        </div>
+
+        <div class="input-field">
+            <label for="blog-body"></label>
+            <textarea style="resize: vertical; overflow: auto; width: 800px; height: 400px;" type="text" id="blog-body" name="blog-body" placeholder="Write something..."></textarea>
+        </div>
+        
+        <div class="button">
+            <input type="submit">
+            <input type="reset">
+        </div>
+    </form>
+</main>
+
+<%- include("partials/footer.ejs") %>

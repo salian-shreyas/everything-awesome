@@ -10,6 +10,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/create", (req, res) => {
+    res.render("create.ejs");
+});
+
+app.post("/create", (req, res) => {
     res.sendStatus(200);
 });
 
