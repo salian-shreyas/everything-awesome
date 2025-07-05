@@ -1,0 +1,27 @@
+<%- include("partials/header.ejs") %>
+
+<main>
+    <% if(locals.blogs.length) { %>
+        <ul>
+            <% blogs.forEach(blog => { %>
+                <li><%= blog %></li>
+
+                <form action="/view">
+                    <button type="submit" name="blog-title" value= <%= blog %> >View</button>
+                </form>
+
+                <form action="/edit">
+                    <button type="submit" name="blog-title" value= <%= blog %> >Edit</button>
+                </form>
+
+                <form action="/delete">
+                    <button type="submit" name="blog-title" value= <%= blog %> >Delete</button>
+                </form>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>Nothing here for now!</p>
+    <% } %>
+</main>
+
+<%- include("partials/footer.ejs") %>
