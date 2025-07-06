@@ -4,12 +4,27 @@
     <form action="/create" method="post">
         <div class="input-field">
             <label for="blog-title"></label>
-            <input style="width: 800px" type="text" id="blog-title" name="blog-title" placeholder="Title">
+            <input 
+                style="width: 800px" 
+                type="text" 
+                id="blog-title" 
+                name="blog-title" 
+                placeholder="Title"
+                value="<%= locals ? locals["blog-title"] : "" %>"
+            >
         </div>
 
         <div class="input-field">
             <label for="blog-body"></label>
-            <textarea style="resize: vertical; overflow: auto; width: 800px; height: 400px;" type="text" id="blog-body" name="blog-body" placeholder="Write something..."></textarea>
+            <textarea 
+                style="resize: vertical; overflow: auto; width: 800px; height: 400px;" 
+                type="text" 
+                id="blog-body" 
+                name="blog-body" 
+                placeholder="Write something..."
+            >
+                <%= locals ? locals["blog-body"] : null %>
+            </textarea>
         </div>
         
         <div class="button">
