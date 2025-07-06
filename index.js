@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import { writeFile } from "node:fs";
 import { readdir } from "node:fs";
 import { readFileSync } from "node:fs";
+import { unlink } from "node:fs";
 
 const app = express();
 
@@ -51,7 +52,16 @@ app.get("/edit", (req, res) => {
 });
 
 app.get("/delete", (req, res) => {
-    res.sendStatus(200);
+    const fileName = blogTitleToFileName(req.query["blog-title"]);
+    const filePath = blogFilePath(fileName);
+
+    unlink(filePath, (err) => {
+        if (err) throw err;
+        console.log(`File: ${fileName} deleted successfully`);
+    });
+    loadBlogFiles();
+
+    res.redirect("/");
 });
 
 app.listen(port, (req, res) => {
@@ -93,6 +103,8 @@ function setTitleBodyToLocals(req, res) {
 }
 
 function loadBlogFiles() {
+    blogFiles.length = 0;
+
     readdir(__dirname + "/public/blogs", (err, files) => {
         if(err) throw err;
 
