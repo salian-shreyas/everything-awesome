@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { writeFile } from "node:fs";
 import { readdir } from "node:fs";
+import { readFileSync } from "node:fs";
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.get("/create", (req, res) => {
 });
 
 app.post("/create", (req, res) => {
-    const fileName = blogFileName(req.body);
+    const fileName = blogTitleToFileName(req.body["blog-title"]);
     const filePath = blogFilePath(fileName); 
     const blog = blogText(req.body);
 
@@ -38,7 +39,13 @@ app.post("/create", (req, res) => {
 });
 
 app.get("/view", (req, res) => {
-    res.sendStatus(200);
+    const blogTitle = req.query["blog-title"];
+    const blogFileName = blogTitleToFileName(blogTitle);
+    
+    res.locals["blog-title"] = blogTitle;
+    res.locals["blog-body"] = blogBody(blogFileName);
+
+    res.render("view.ejs");
 });
 
 app.get("/edit", (req, res) => {
@@ -53,11 +60,11 @@ app.listen(port, (req, res) => {
     console.log(`Server running on port: ${port}`);
 });
 
-function blogFileName(blog) {
-    return blog["blog-title"].split(" ").join("-") + ".txt";
+function blogTitleToFileName(blogTitle) {
+    return blogTitle.split(" ").join("-") + ".txt";
 }
 
-function blogTitle(filename) {
+function blogFileNameToTitle(filename) {
     return filename.split("-").join(" ").slice(0, -4);
 }
 
@@ -69,8 +76,14 @@ function blogText(blog) {
     return blog["blog-title"] + "\n\n" + blog["blog-body"];
 }
 
+function blogBody(filename) {
+    const blog = readFileSync("public/blogs/" + filename, "utf-8");
+
+    return blog.split("\n").slice(1).join("\n");
+}
+
 function blogTitles() {
-    return blogFiles.map(filename => blogTitle(filename) );
+    return blogFiles.map(filename => blogFileNameToTitle(filename) );
 }
 
 function loadBlogFiles() {

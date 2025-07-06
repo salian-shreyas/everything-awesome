@@ -1,0 +1,19 @@
+<%- include("partials/header.ejs") %>
+
+<main>
+    <% if(locals) { %>
+        <h3><%= locals["blog-title"] %></h3>
+
+        <pre><%= locals["blog-body"] %></pre>
+
+        <form action="/">
+            <button type="submit">Home</button>
+        </form>
+
+        <form action="/edit">
+            <button type="submit" name="blog-title" value= <%= locals["blog-title"] %> >Edit</button>
+        </form>
+    <% }%>
+</main>
+
+<%- include("partials/footer.ejs") %>
