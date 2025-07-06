@@ -33,9 +33,9 @@ app.post("/create", (req, res) => {
         if (err) throw err;
         console.log(`Blog saved to ${filePath}`);
     });
-    blogFiles.push(fileName);
+    if (!blogFiles.includes(fileName)) blogFiles.push(fileName);
 
-    res.redirect("/create");
+    res.redirect("/");
 });
 
 app.get("/view", (req, res) => {
