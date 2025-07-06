@@ -39,17 +39,15 @@ app.post("/create", (req, res) => {
 });
 
 app.get("/view", (req, res) => {
-    const blogTitle = req.query["blog-title"];
-    const blogFileName = blogTitleToFileName(blogTitle);
-    
-    res.locals["blog-title"] = blogTitle;
-    res.locals["blog-body"] = blogBody(blogFileName);
+    setTitleBodyToLocals(req, res);
 
     res.render("view.ejs");
 });
 
 app.get("/edit", (req, res) => {
-    res.sendStatus(200);
+    setTitleBodyToLocals(req, res);
+
+    res.render("create.ejs");
 });
 
 app.get("/delete", (req, res) => {
@@ -84,6 +82,14 @@ function blogBody(filename) {
 
 function blogTitles() {
     return blogFiles.map(filename => blogFileNameToTitle(filename) );
+}
+
+function setTitleBodyToLocals(req, res) {
+    const blogTitle = req.query["blog-title"];
+    const blogFileName = blogTitleToFileName(blogTitle);
+    
+    res.locals["blog-title"] = blogTitle;
+    res.locals["blog-body"] = blogBody(blogFileName);
 }
 
 function loadBlogFiles() {
