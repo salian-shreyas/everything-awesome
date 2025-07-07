@@ -2,7 +2,7 @@
 
 <main>
     <form action="/create" method="post">
-        <div class="input-field">
+        <div class="input-field blog-title">
             <label for="blog-title"></label>
             <input 
                 style="width: 800px" 
@@ -14,7 +14,7 @@
             >
         </div>
 
-        <div class="input-field">
+        <div class="input-field blog-body">
             <label for="blog-body"></label>
             <textarea 
                 style="resize: vertical; overflow: auto; width: 800px; height: 400px;" 
@@ -25,9 +25,9 @@
             ><%= locals ? locals["blog-body"] : null %></textarea>
         </div>
         
-        <div class="button">
-            <input type="submit" value="Save">
-            <input type="reset" value="Reset">
+        <div class="create-buttons">
+            <input class="button" type="submit" value="Save">
+            <input class="button" type="reset" value="Reset">
         </div>
     </form>
 </main>

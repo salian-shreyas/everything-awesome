@@ -14,6 +14,7 @@ const blogFiles = [];
 loadBlogFiles();
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public/"))
 
 app.get("/", (req, res) => {
     res.locals.blogs = blogTitles();

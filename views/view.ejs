@@ -2,17 +2,19 @@
 
 <main>
     <% if(locals) { %>
-        <h3><%= locals["blog-title"] %></h3>
+        <h3 class="blog-title"><%= locals["blog-title"] %></h3>
 
-        <pre><%= locals["blog-body"] %></pre>
+        <pre class="blog-body"><%= locals["blog-body"] %></pre>
 
-        <form action="/">
-            <button type="submit">Home</button>
-        </form>
+        <div class="view-buttons">
+            <form action="/">
+                <button class="button" type="submit">Home</button>
+            </form>
 
-        <form action="/edit">
-            <button type="submit" name="blog-title" value= <%= locals["blog-title"] %> >Edit</button>
-        </form>
+            <form action="/edit">
+                <button type="submit" name="blog-title" value= <%= locals["blog-title"] %> >Edit</button>
+            </form>
+        </div>
     <% }%>
 </main>
 

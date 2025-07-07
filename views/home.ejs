@@ -2,14 +2,14 @@
 
 <main>
     <% if(locals.blogs.length) { %>
-        <ul>
+        <ul class="blog-list">
             <% blogs.forEach(blog => { %>
-                <li>
+                <li class="blog-item">
                     <h3><%= blog %></h3>
                     <form>
-                        <button type="submit" name="blog-title" value="<%= blog %>" formaction="/view">View</button>
-                        <button type="submit" name="blog-title" value="<%= blog %>" formaction="/edit">Edit</button>
-                        <button type="submit" name="blog-title" value="<%= blog %>" formaction="/delete">Delete</button>
+                        <button class="button blog-button" type="submit" name="blog-title" value="<%= blog %>" formaction="/view">View</button>
+                        <button class="button blog-button" type="submit" name="blog-title" value="<%= blog %>" formaction="/edit">Edit</button>
+                        <button class="button blog-button" type="submit" name="blog-title" value="<%= blog %>" formaction="/delete">Delete</button>
                     </form>
                 </li>
             <% }); %>
